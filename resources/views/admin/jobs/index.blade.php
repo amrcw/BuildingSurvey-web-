@@ -32,7 +32,7 @@
                 <tr>
                     <td>{{$job->id}}</td>
                     <td>{{$job->user->name}}</td>
-                    <td>{{$job->category_id}}</td>
+                    <td>{{$job->category ? $job->category->name : "Uncategorized"}}</td>
                     <td><img height="30" src="{{$job->photo ? $job->photo->file : '/images/placeholder.png'}}" alt=""></td>
                     <td>{{$job->title}}</td>
                     <td>{{$job->description}}</td>

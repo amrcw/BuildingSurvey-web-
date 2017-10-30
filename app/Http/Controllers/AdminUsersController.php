@@ -21,6 +21,8 @@ class AdminUsersController extends Controller
     {
         //
         $users = User::all();
+        
+       // return $users;
         return view('admin.users.index',compact('users'));
     }
 
@@ -56,7 +58,7 @@ class AdminUsersController extends Controller
             $input['photo_id'] = $photo->id;
         }
         $input['password'] = bcrypt($request->password);
-        $input['role_id'] = $request->role_id + 1;
+        $input['role_id'] = $request->role_id;
         User::create($input);
 
         return redirect('/admin/users');

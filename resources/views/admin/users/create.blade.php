@@ -18,7 +18,7 @@
 
         <div class="form-group">
              {!! Form::label('role_id','Role :') !!}
-             {!! Form::select('role_id',array_merge(['' =>'Choose Options'],$roles), null ,['class'=>'form-control']) !!}
+             {!! Form::select('role_id',['' =>'Choose Options']+ $roles, null ,['class'=>'form-control']) !!}
         </div>
 
         <div class="form-group">

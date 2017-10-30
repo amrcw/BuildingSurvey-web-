@@ -40,6 +40,8 @@ class User extends Authenticatable
         return $this->belongsTo('App\Photo');
     }
 
+    
+
     //Mutators
     public function setPasswordAttribute($password)
     {

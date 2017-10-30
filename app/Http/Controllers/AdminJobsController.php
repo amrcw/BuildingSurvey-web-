@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Requests\JobsCreateRequest;
 use App\Job;
 use App\Photo;
@@ -30,7 +31,9 @@ class AdminJobsController extends Controller
     public function create()
     {
         //
-        return view('admin.jobs.create');
+        $categories = Category::pluck('name','id')->all();
+
+        return view('admin.jobs.create',compact('categories'));
     }
 
     /**
@@ -45,6 +48,7 @@ class AdminJobsController extends Controller
       //  return $request->all();
 
         $input = $request->all();
+        
         $user = Auth::user();
         if($file = $request->file('photo_id'))
         {
@@ -52,6 +56,7 @@ class AdminJobsController extends Controller
             $file->move('images',$name);
             $photo = Photo::create(['file'=>$name]);
             $input['photo_id'] = $photo->id;
+          
         }
 
         $user->jobs()->create($input);
