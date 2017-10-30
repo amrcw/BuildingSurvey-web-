@@ -28,13 +28,41 @@ class User extends Authenticatable
     ];
 
 
+    //Role table relationship
     public function role()
     {
         return $this->belongsTo('App\Role');
     }
 
+    //Photo table relationship
     public function photo()
     {
         return $this->belongsTo('App\Photo');
+    }
+
+    //Mutators
+    public function setPasswordAttribute($password)
+    {
+        if(!empty($password))
+        {
+            $this->attributes['password'] = bcrypt($password);
+        }
+    }
+
+    //Middleware
+    public function isAdmin()
+    {
+        if($this->role->name == 'Administrator' && $this->is_active = '1')
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+    //Jobs
+    public function jobs()
+    {
+        return $this->hasMany('App\Job');
     }
 }
